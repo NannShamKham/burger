@@ -24,7 +24,7 @@ class BurgerBuilder extends Component{
         purchasing:false,
     }
 
-   updatePurchasable(updateIngredients){
+   updatePurchasable=(updateIngredients)=>{
         const ingredients = {...updateIngredients}
         const sum = Object.keys(ingredients).map(key=>{
             return ingredients[key]
