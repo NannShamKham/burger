@@ -10,6 +10,7 @@ function BuildControls(props) {
     ]
     return (
         <div className={Classes.BuildControls}>
+            <p>Current Price : <strong>{props.price.toFixed(2)} $</strong></p>
             {
                 controls.map(control=>{
                     return <BuildControl
@@ -21,7 +22,7 @@ function BuildControls(props) {
                     />
                 })
             }
-
+        <button onClick={props.ordered} disabled={!props.purchasable} className={Classes.OrderButton}>ORDER NOW !</button>
         </div>
     );
 }
