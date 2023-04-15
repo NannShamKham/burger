@@ -81,7 +81,7 @@ class BurgerBuilder extends Component{
         return (
             <Axi>
                 <Model show={this.state.purchasing} modelClosed={this.modelClosedHandler}>
-                    <OrderSumary removeModel={this.modelClosedHandler} ingredients={this.state.ingredients}/>
+                    <OrderSumary price={this.state.totalPrice} removeModel={this.modelClosedHandler} ingredients={this.state.ingredients}/>
                 </Model>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls
