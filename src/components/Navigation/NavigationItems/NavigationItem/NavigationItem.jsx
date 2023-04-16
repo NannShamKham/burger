@@ -1,5 +1,4 @@
 import React from 'react';
-import Axi from "../../../../hoc/axi";
 import Classes from './NavigationItem.css'
 function NavigationItem(props) {
     return (

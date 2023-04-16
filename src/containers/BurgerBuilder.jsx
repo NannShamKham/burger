@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import Axi from "../hoc/axi";
+import Axi from "../hoc/Aux/axi";
 import Burger from "../components/Burger/Burger";
 import BuildControls from "../components/Burger/BuildControls/BuildControls";
 import Model from "../components/UI/Model/Model";
