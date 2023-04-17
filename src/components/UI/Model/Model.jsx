@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import Classes from './Model.css'
 import Axi from "../../../hoc/Aux/axi";
 import Backdrop from "../Backdrop/Backdrop";
+import Spinner from "../Spinner/Spinner";
 class Model extends Component{
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return nextProps.show !== this.props.show
+        return nextProps.show !== this.props.show || nextProps.children !==this.props.children
     }
     componentWillUpdate() {
         console.log("[Model] will update")
@@ -24,6 +25,7 @@ class Model extends Component{
                     {this.props.children}
                 </div>
                 <Backdrop show={this.props.show}  clicked={this.props.modelClosed}/>
+
             </Axi>
         )
 

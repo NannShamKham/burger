@@ -26,7 +26,7 @@ class OrderSumary extends Component{
                 <p>Continue to checkout?</p>
 
                 <Button clicked={this.props.removeModel} btnType={'Danger'}>CANCEL</Button>
-                <Button btnType={'Success'}>Continue</Button>
+                <Button clicked={this.props.modelContinue} btnType={'Success'}>Continue</Button>
             </Axi>
         )
     }

@@ -4,7 +4,8 @@ import Burger from "../components/Burger/Burger";
 import BuildControls from "../components/Burger/BuildControls/BuildControls";
 import Model from "../components/UI/Model/Model";
 import OrderSumary from "../components/Burger/OrderSummary/OrderSumary";
-
+import instance from "../axios-orders";
+import Spinner from "../components/UI/Spinner/Spinner";
 const INGREDIENT_PRICES={
     salad:0.3,
     cheese:0.5,
@@ -22,6 +23,7 @@ class BurgerBuilder extends Component{
         totalPrice:4,
         purchasable:false,
         purchasing:false,
+        loading:false
     }
 
    updatePurchasable=(updateIngredients)=>{
@@ -39,6 +41,33 @@ class BurgerBuilder extends Component{
     }
     modelClosedHandler=()=>{
         this.setState({purchasing:false})
+    }
+    modelContinueHandler=()=>{
+        this.setState({loading:true})
+        let orders={
+            ingedrients:this.state.ingredients,
+            price:this.state.totalPrice,
+            customer:{
+                name:"Nann",
+                address:{
+                    street:"ANAWYAHTAR",
+                    zipCode:"234",
+                    country:"Myanmar"
+                },
+                email:'nann@gmail.com',
+        },
+            deliveryMethod:'fastest'
+        };
+
+        instance.post('/orders.json',orders)
+            .then(response=> {
+                this.setState({loading:false,purchasing:false})
+                console.log(response)
+            })
+            .catch(err=>{
+                this.setState({loading:false,purchasing:false})
+                console.log(err)
+            })
     }
     addIngredientHandler = (type)=>{
         const oldCount = this.state.ingredients[type];
@@ -78,10 +107,17 @@ class BurgerBuilder extends Component{
         for (let key in disableInfo){
             disableInfo[key] = disableInfo[key] <= 0
         }
+
+        let orderSummary =  <OrderSumary price={this.state.totalPrice} modelContinue={this.modelContinueHandler} removeModel={this.modelClosedHandler} ingredients={this.state.ingredients}/>;
+        if (this.state.loading){
+            orderSummary = <Spinner/>
+        }
+
         return (
             <Axi>
-                <Model show={this.state.purchasing} modelClosed={this.modelClosedHandler}>
-                    <OrderSumary price={this.state.totalPrice} removeModel={this.modelClosedHandler} ingredients={this.state.ingredients}/>
+                {/*<Spinner/>*/}
+                <Model show={this.state.purchasing} modelClosed={this.modelClosedHandler} >
+                    {orderSummary}
                 </Model>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls
